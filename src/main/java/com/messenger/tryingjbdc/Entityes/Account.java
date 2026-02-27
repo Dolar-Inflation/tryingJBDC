@@ -1,4 +1,14 @@
 package com.messenger.tryingjbdc.Entityes;
 
-public class account {
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class Account {
+
+    private Long id;
+    private String name;
+    private String password;
+
 }
