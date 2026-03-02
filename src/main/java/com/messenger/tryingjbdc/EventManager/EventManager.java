@@ -17,21 +17,21 @@ public class EventManager {
         }
     }
 
-    public void subscribe(String eventType, EventListener listener) {
+    public <D> void subscribe(String eventType, EventListener listener) {
         List<EventListener> users = listeners.get(eventType);
         users.add(listener);
     }
 
-    public void unsubscribe(String eventType, Class<? extends EventListener> listenerClass) {
+    public <D> void unsubscribe(String eventType, Class<? extends EventListener> listenerClass) {
         List<EventListener> users = listeners.get(eventType);
 //        users.remove(listener);
         users.removeIf(listener -> listener.getClass().equals(listenerClass));
     }
 
-    public void notify(String eventType, AccountDTO account) {
+    public <D> void notify(String eventType, D data) {
         List<EventListener> users = listeners.get(eventType);
         for (EventListener listener : users) {
-            listener.update(eventType, account);
+            listener.update(eventType, data);
         }
     }
 

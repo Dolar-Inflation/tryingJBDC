@@ -5,6 +5,7 @@ import com.messenger.tryingjbdc.Entityes.Account;
 import com.messenger.tryingjbdc.EventManager.EventManager;
 import com.messenger.tryingjbdc.Listeners.CreateListener;
 import com.messenger.tryingjbdc.Listeners.FindByIdListener;
+import com.messenger.tryingjbdc.Listeners.GetAllListener;
 import com.messenger.tryingjbdc.Mappers.AccountMapper;
 import com.messenger.tryingjbdc.Repositoryies.AccountRepository;
 import org.springframework.stereotype.Service;
@@ -24,21 +25,22 @@ public class AccountService {
 
         eventManager.subscribe("add account", new CreateListener());
         eventManager.subscribe("found account",new FindByIdListener());
+        eventManager.subscribe("found",new GetAllListener());
     }
 
 
     public AccountDTO getAccountById(Long id) {
        if (id == 10){
-           eventManager.unsubscribe("found account", FindByIdListener.class);
+           eventManager.unsubscribe("found account 10", FindByIdListener.class);
        }
-       else eventManager.subscribe("found account", new FindByIdListener());
+       else if (id == 7) eventManager.subscribe("found account", new FindByIdListener());
        AccountDTO dto = accountMapper.toDto(accountRepository.getAccountById(Math.toIntExact(id)));
         eventManager.notify("found account", dto);
         return dto;
     }
     public List<AccountDTO> getAllAccounts() {
        List<AccountDTO> accountDTOS = accountMapper.toDto(accountRepository.getAllAccounts());
-       eventManager.notify("found", (AccountDTO) accountDTOS);
+       eventManager.notify("found",  accountDTOS);
         return accountDTOS;
     }
 
