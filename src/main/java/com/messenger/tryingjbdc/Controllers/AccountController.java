@@ -3,9 +3,11 @@ package com.messenger.tryingjbdc.Controllers;
 import com.messenger.tryingjbdc.DTO.AccountDTO;
 import com.messenger.tryingjbdc.Entityes.Account;
 import com.messenger.tryingjbdc.Services.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 public class AccountController {
@@ -30,8 +32,10 @@ public class AccountController {
 
     @PostMapping("/create")
     public void createAccount(@RequestBody AccountDTO accountDTO) {
-        accountService.createAccount(accountDTO);
+
+       accountService.createAccount(accountDTO);
     }
 
+    
 
 }

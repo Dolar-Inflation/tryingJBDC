@@ -2,12 +2,13 @@ package com.messenger.tryingjbdc.EventManager;
 
 import com.messenger.tryingjbdc.DTO.AccountDTO;
 import com.messenger.tryingjbdc.Interfaces.EventListener;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@Component
 public class EventManager {
     Map<String, List<EventListener>> listeners=new HashMap<>();
 

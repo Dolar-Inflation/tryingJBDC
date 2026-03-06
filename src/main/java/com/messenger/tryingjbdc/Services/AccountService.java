@@ -11,6 +11,8 @@ import com.messenger.tryingjbdc.Repositoryies.AccountRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
+
 @Service
 public class AccountService {
 
@@ -21,6 +23,8 @@ public class AccountService {
     public AccountService(AccountRepository accountRepository, AccountMapper accountMapper) {
         this.accountRepository = accountRepository;
         this.accountMapper = accountMapper;
+
+
         this.eventManager = new EventManager("found account","found","add account");
 
         eventManager.subscribe("add account", new CreateListener());
