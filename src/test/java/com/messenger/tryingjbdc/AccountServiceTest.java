@@ -28,17 +28,7 @@ import java.util.List;
 @Transactional
 public class AccountServiceTest {
 
-    @InjectMocks
-    AccountService accountServiceInjectMock;
 
-@Mock
-EventManager eventManager;
-
-    @Mock
-    AccountRepository accountRepository;
-
-    @Mock
-    AccountMapper accountMapper;
 
 
     AccountService accountServiceMock = Mockito.mock(AccountService.class);
@@ -59,16 +49,5 @@ EventManager eventManager;
         assertTrue(result.stream().allMatch(dto -> dto instanceof AccountDTO));
 
     }
-//    @Test
-//    public void TestEventManager() {
-//       List< AccountDTO> accountDTO = List.of(new AccountDTO());
-//       Mockito.when(accountRepository.getAllAccounts()).thenReturn(List.of());
-//        Mockito.when(accountMapper.toDto(List.of())).thenReturn(accountDTO);
-//        accountServiceInjectMock.getAllAccounts();
-//        Mockito.verify(eventManager).notify("found", accountDTO);
-//
-//
-//
-//
-//    }
+
 }

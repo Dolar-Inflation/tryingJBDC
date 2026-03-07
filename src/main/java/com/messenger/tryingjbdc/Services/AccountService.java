@@ -11,7 +11,6 @@ import com.messenger.tryingjbdc.Repositoryies.AccountRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class AccountService {
@@ -25,7 +24,9 @@ public class AccountService {
         this.accountMapper = accountMapper;
 
 
-        this.eventManager = new EventManager("found account","found","add account");
+        this.eventManager = new EventManager("found account", "found", "add account");
+
+
 
         eventManager.subscribe("add account", new CreateListener());
         eventManager.subscribe("found account",new FindByIdListener());
@@ -38,12 +39,12 @@ public class AccountService {
            eventManager.unsubscribe("found account 10", FindByIdListener.class);
        }
        else if (id == 7) eventManager.subscribe("found account", new FindByIdListener());
-       AccountDTO dto = accountMapper.toDto(accountRepository.getAccountById(Math.toIntExact(id)));
+       AccountDTO dto = accountMapper.toDtoList(accountRepository.getAccountById(Math.toIntExact(id)));
         eventManager.notify("found account", dto);
         return dto;
     }
     public List<AccountDTO> getAllAccounts() {
-       List<AccountDTO> accountDTOS = accountMapper.toDto(accountRepository.getAllAccounts());
+       List<AccountDTO> accountDTOS = accountMapper.toDtoList(accountRepository.getAllAccounts());
        eventManager.notify("found",  accountDTOS);
         return accountDTOS;
     }

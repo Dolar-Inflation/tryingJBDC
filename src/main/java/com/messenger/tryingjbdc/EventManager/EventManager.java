@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-@Component
+
 public class EventManager {
     Map<String, List<EventListener>> listeners=new HashMap<>();
 
@@ -18,22 +18,25 @@ public class EventManager {
         }
     }
 
-    public <D> void subscribe(String eventType, EventListener listener) {
+    public <D> String subscribe(String eventType, EventListener listener) {
         List<EventListener> users = listeners.get(eventType);
         users.add(listener);
+        return eventType;
     }
 
-    public <D> void unsubscribe(String eventType, Class<? extends EventListener> listenerClass) {
+    public <D> String unsubscribe(String eventType, Class<? extends EventListener> listenerClass) {
         List<EventListener> users = listeners.get(eventType);
 //        users.remove(listener);
         users.removeIf(listener -> listener.getClass().equals(listenerClass));
+        return eventType;
     }
 
-    public <D> void notify(String eventType, D data) {
+    public <D> String notify(String eventType, D data) {
         List<EventListener> users = listeners.get(eventType);
         for (EventListener listener : users) {
             listener.update(eventType, data);
         }
+        return eventType;
     }
 
 }

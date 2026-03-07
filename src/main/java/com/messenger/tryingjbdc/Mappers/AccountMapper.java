@@ -10,11 +10,11 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface AccountMapper {
 
-AccountDTO toDto(Account account);
+AccountDTO toDtoList(Account account);
 
 
 
-List<AccountDTO> toDto(List<Account> accounts);
+List<AccountDTO> toDtoList(List<Account> accounts);
 
 
 @Mapping(target = "id", ignore = true)
